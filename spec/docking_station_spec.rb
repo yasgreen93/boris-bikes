@@ -18,27 +18,24 @@ describe DockingStation do
 
     it { is_expected.to respond_to(:dock).with(1).argument }
 
-    it { is_expected.to respond_to(:bike) }
+    it { is_expected.to respond_to(:bikes) }
 
     describe 'docking bike' do
       it 'docks something' do
       	bike = Bike.new
-      	expect(subject.dock(bike)).to eq bike
+      	expect(subject.dock(bike)).to eq [bike]
       end
 
-      before(:each) do
-        @bike = Bike.new
-      end
 
       it 'raises an error when the docking station is full' do
-        subject.dock(@bike)
+        20.times {subject.dock(Bike.new)}
         bike2 = Bike.new
         expect { subject.dock(bike2) }.to raise_error 'Docking station full'
       end
 
       it 'returns docked bikes' do
-      	subject.dock(@bike)
-      	expect(subject.bike).to eq @bike
+        bike = Bike.new
+      	expect(subject.dock(bike)).to eq [bike]
       end
     end
 
