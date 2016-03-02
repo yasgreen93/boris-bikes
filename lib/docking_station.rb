@@ -10,8 +10,8 @@ class DockingStation
   end
 
   def release_bike
-    raise "Sorry no bikes!" if empty?
-    @bikes.pop
+    raise "Sorry no bikes available!" if empty?
+    working_bikes.pop
   end
 
   def dock(bike)
@@ -27,6 +27,11 @@ private
   end
 
   def empty?
-    @bikes.empty?
+    #@bikes.empty?
+    working_bikes.empty?
+  end
+
+  def working_bikes
+    @bikes.select{|bike| bike.working?}
   end
 end
