@@ -41,4 +41,5 @@ describe DockingStation do
   it "initializes with an array for bikes" do
     expect(subject.bikes).to be_a Array
   end
+
 end
