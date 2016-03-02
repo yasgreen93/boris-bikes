@@ -34,12 +34,16 @@ describe DockingStation do
   end
 
   it "won't dock bikes if full" do
-    20.times {subject.dock(Bike.new)}
+    DockingStation::DEFAULT_VALUE.times {subject.dock(Bike.new)}
     expect {subject.dock(Bike.new)}.to raise_error("Too many bikes!")
   end
 
   it "initializes with an array for bikes" do
     expect(subject.bikes).to be_a Array
+  end
+
+  it "Should have default capacity of 20" do
+    expect(DockingStation::DEFAULT_VALUE).to eq 20
   end
 
 end
