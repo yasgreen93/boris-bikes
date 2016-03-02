@@ -20,12 +20,12 @@ describe DockingStation do
     expect(subject.dock(bike)).to eq bike
   end
 
-  it { is_expected.to respond_to (:bike)}
+  it { is_expected.to respond_to (:bikes)}
 
   it 'shows the docked bike' do
     bike = Bike.new
     subject.dock(bike)
-    expect(subject.bike).to eq bike
+    expect(subject.bikes.last).to eq bike
   end
 
   it "raises error if no bikes" do
@@ -34,7 +34,11 @@ describe DockingStation do
   end
 
   it "won't dock bikes if full" do
-    subject.dock(Bike.new)
+    20.times {subject.dock(Bike.new)}
     expect {subject.dock(Bike.new)}.to raise_error("Too many bikes!")
+  end
+
+  it "initializes with an array for bikes" do
+    expect(subject.bikes).to be_a Array
   end
 end
