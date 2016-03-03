@@ -1,7 +1,8 @@
 require 'docking_station'
 
 describe DockingStation do
-  let(:bike) {Bike.new}
+  #let(:bike) {Bike.new} 
+  let(:bike) { double :bike } 
     it { is_expected.to respond_to :release_bike }
 
     describe 'create docking station' do
@@ -16,21 +17,26 @@ describe DockingStation do
 
     describe '#release_bike' do
       it 'has no working bikes' do
-        subject.dock(bike)
-        bike.report_broken
+      	allow(bike).to receive(:working?).and_return(false)
+      	allow(bike).to receive(:report_broken).and_return(false)
+        subject.dock(bike) 
+        bike.report_broken 
         expect{ subject.release_bike }.to raise_error 'No bikes working'
       end
 
       it 'does not release a broken bike' do
         # It keeps the broken bike but gives out a working bike.
-        2.times {subject.dock(Bike.new)}
+        allow(bike).to receive(:working?).and_return(true)
+        allow(bike).to receive(:report_broken).and_return(false)
+        2.times {subject.dock(bike)} 
         subject.bikes[-1].report_broken
         expect(subject.release_bike.working?).to eq true
       end
 
-      it 'releases a bike' do
-        subject.dock(bike)
-        expect(subject.release_bike).to eq bike
+      it 'releases a working bike' do
+      	allow(bike).to receive(:working?).and_return(true)
+        subject.dock(bike) 
+        expect(subject.release_bike).to be_working
       end
 
       it 'raises an error when there are no bikes available' do
@@ -44,16 +50,16 @@ describe DockingStation do
 
     describe 'docking bike' do
       it 'docks something' do
-      	expect(subject.dock(bike)).to eq [bike]
+      	expect(subject.dock(bike)).to eq [(bike)] 
       end
 
       it 'raises an error when the docking station is full' do
-        subject.capacity.times {subject.dock(bike)}
-        expect { subject.dock(bike) }.to raise_error 'Docking station full'
+        subject.capacity.times {subject.dock double(:bike)} 
+        expect { subject.dock double(:bike) }.to raise_error 'Docking station full'
       end
 
       it 'returns docked bikes' do
-      	expect(subject.dock(bike)).to eq [bike]
+      	expect(subject.dock(bike)).to eq [bike] 
       end
 
     end
