@@ -8,6 +8,10 @@ class Bike
     @works = false
   end
 
+  def fix_bike
+    @works = true
+  end
+
   def working?
     @works
   end
