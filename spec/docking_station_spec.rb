@@ -5,7 +5,7 @@ describe DockingStation do
   it { is_expected.to respond_to (:release_bike) }
 
   it 'releases working bikes' do
-    subject.dock(Bike.new)
+    subject.dock double :bike
     expect(subject.release_bike).to be_working
   end
 
@@ -14,14 +14,14 @@ describe DockingStation do
   end
 
   it 'docks a bike' do
-    bike = Bike.new
+    bike = double :bike
     expect(subject.dock(bike)).to eq bike
   end
 
   it { is_expected.to respond_to (:bikes)}
 
   it 'shows the docked bike' do
-    bike = Bike.new
+    bike = double :bike
     subject.dock(bike)
     expect(subject.bikes.last).to eq bike
   end
@@ -32,8 +32,8 @@ describe DockingStation do
   end
 
   it "won't dock bikes if full" do
-    subject.capacity.times {subject.dock(Bike.new)}
-    expect {subject.dock(Bike.new)}.to raise_error("Too many bikes!")
+    subject.capacity.times {subject.dock double :bike}
+    expect {subject.dock double :bike}.to raise_error("Too many bikes!")
   end
 
   it "initializes with an array for bikes" do
@@ -55,7 +55,7 @@ describe DockingStation do
   end
 
   it "should not release a broken bike" do
-    bike = Bike.new
+    bike =  double :bike
     bike.report_broken
     subject.dock(bike)
     expect {subject.release_bike}.to raise_error("Sorry no bikes available!")
