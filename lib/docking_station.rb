@@ -1,5 +1,6 @@
 # lib/dockingstation.rb
 require_relative 'Bike'
+require_relative 'Van'
 
 class DockingStation
   DEFAULT_VALUE = 20
