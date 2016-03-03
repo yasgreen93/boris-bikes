@@ -4,6 +4,8 @@ describe Van do
   let(:bike_working){double :bike_w, :working? => true}
   let(:bike_broken){double :bike_b, :working? => false}
   let(:station){double :station, :bikes => [bike_working, bike_broken]}
+  let(:station_empty){double :station, :bikes => [], :capacity => 2}
+  let(:station_full){double :station, :bikes => [bike_working], :capacity => 2}
   let(:garage){double(:garage, :bikes => [])}
   let(:garage_full){double(:garage_full, :bikes => [bike_working, bike_working])}
   it {is_expected.to respond_to(:collect_broken).with(1).argument}
@@ -50,6 +52,18 @@ describe Van do
       subject.collect_working(garage_full)
       expect(garage_full.bikes).to be_empty
     end
+  end
+
+  describe "#deliver_working" do
+    it "can transfer working bikes from van to the docking station" do
+      subject.collect_working(garage_full)
+      subject.deliver_working(station_empty)
+      expect(station_empty.bikes).not_to be_empty
+    end
+
+
+
+
   end
 
 end

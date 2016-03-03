@@ -21,6 +21,15 @@ attr_reader :bikes
     garage.bikes.clear
   end
 
+  def deliver_working(station)
+    @bikes.each do |bike|
+      until station.capacity == station.bikes.size
+        station.bikes << bike if bike.working?
+      end
+    end
+    @bikes = []
+  end
+
   private
   def broken_bikes(array)
     array.select{|bike| !bike.working?}
