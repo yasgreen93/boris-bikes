@@ -1,7 +1,7 @@
 require_relative 'docking_station'
 
 class Van
-  attr_accessor :storage
+  attr_reader :storage
 
   def initialize
     @storage = []
@@ -10,7 +10,7 @@ class Van
   def collect_broken(station)
     broken_bikes = station.bikes.select {|bike| bike.working? == false}
     broken_bikes.each {|bike| @storage << bike }
-    @storage.each {|bike| station.bikes.delete(bike)}
+    storage.each {|bike| station.bikes.delete(bike)}
   end
 
 end
