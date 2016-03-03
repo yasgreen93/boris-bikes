@@ -13,6 +13,15 @@ class Van
     storage.each {|bike| station.bikes.delete(bike)}
   end
 
+  def unload_fixed(station)
+  	if storage.all? {|bike| bike.working? }
+  		storage.each {|bike| station.dock(bike)}
+  		storage.clear
+  	else
+  		raise "These bikes are broken and so cannot be re-docked."
+  	end
+  end
+
 end
 #
 # v=Van.new

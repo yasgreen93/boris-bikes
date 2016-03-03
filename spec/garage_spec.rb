@@ -28,4 +28,12 @@ describe Garage do
     works = garage.home.select {|bike| bike.working? == true}
     expect(works.size).to eq garage.home.size
   end
+
+  it 'loads the fixed bikes into the van such that the garage is empty' do 
+  	garage.fixed_bikes
+  	garage.load_working(van)
+  	van_check = van.storage.select {|bike| bike.working? == true}
+  	expect(van_check.size).to eq van.storage.size
+  	expect(garage.home).to eq []
+  end
 end

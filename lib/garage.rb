@@ -20,7 +20,9 @@ attr_reader :home
 		end
 	end
 
-  def load_working
+  def load_working(van)
+	fixed_bikes.each { |bike| van.storage << bike } 
+	home.clear
   end
 
 end
