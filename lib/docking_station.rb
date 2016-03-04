@@ -20,6 +20,9 @@ class DockingStation
     @bikes.last
   end
 
+  def broken_bikes
+    @bikes.select{|bike| !bike.working?}
+  end 
 private
 
   def full?
@@ -34,4 +37,6 @@ private
   def working_bikes
     @bikes.select{|bike| bike.working?}
   end
+
+
 end

@@ -3,7 +3,7 @@ require "docking_station"
 
 describe DockingStation do
   it { is_expected.to respond_to (:release_bike) }
-  let(:bike){double :bike}
+  let(:bike){double :bike, :working? => true}
 
   it 'releases working bikes' do
     bike = double(:bike, :working? => true)
@@ -61,5 +61,17 @@ describe DockingStation do
     subject.dock(bike)
     expect {subject.release_bike}.to raise_error("Sorry no bikes available!")
   end
+
+
+  describe "broken bikes" do
+    it "should return an array of only broken bikes" do
+      bike_broken = double(:bike, :working? => false)
+      subject.dock(bike)
+      subject.dock(bike_broken)
+      expect(subject.broken_bikes).to eq [bike_broken]
+    end
+  end
+
+
 
 end
