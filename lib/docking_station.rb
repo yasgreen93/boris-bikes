@@ -35,7 +35,6 @@ private
   end
 
   def empty?
-    #@bikes.empty?
     working_bikes.empty?
   end
 

@@ -45,6 +45,15 @@ describe Van do
     end
   end
 
+  describe "deliver_working" do
+    it "should transfer bikes from van to docking station" do
+      subject.collect_working(garage_full)
+      subject.deliver_working(station_empty)
+      expect(station_empty.bikes).to eq [bike_working, bike_working]
+      expect(subject.deliver_working(station_empty)).to eq []
+    end
+  end
+
   # describe "#collect_broken" do
 
   #   it "can transfer broken bikes from docking station to its storage" do
