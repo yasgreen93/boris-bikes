@@ -1,4 +1,4 @@
-# lib/dockingstation.rb
+# lib/dock ingstation.rb
 require_relative 'Bike'
 
 class DockingStation

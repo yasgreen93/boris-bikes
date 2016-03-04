@@ -17,17 +17,17 @@ attr_reader :bikes
   end
 
   def collect_working(garage)
-    garage.bikes.each{|bike| @bikes << bike}
+    garage.bikes.each{|bike| @bikes << bike} #maybe we should have a .report_broken called on each bike to 'fix' them?
     garage.bikes.clear
   end
 
   def deliver_working(station)
     @bikes.each do |bike|
-      until station.capacity == station.bikes.size
-        station.bikes << bike if bike.working?
-      end
+      #until station.capacity == station.bikes.size (this loop is putting duplicates into station)
+        station.bikes << bike if bike.working? #putting the same bikes in?????
+      #end
     end
-    @bikes = []
+    @bikes = [] #need to change this because it deletes any remaining bikes once DockingStation is at capacity
   end
 
   private
