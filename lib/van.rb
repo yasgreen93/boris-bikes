@@ -7,6 +7,9 @@ attr_reader :bikes
   end
 
    def collect_broken(station)
+    #  bikes << station.broken_bikes
+    station.broken_bikes.each {|bike| bikes << bike}
+    station.remove_broken
   #   broken_bikes(station.bikes).each{|x| @bikes << x}
   #   station.bikes.select!{|x| x.working?}
    end

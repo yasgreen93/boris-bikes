@@ -22,7 +22,12 @@ class DockingStation
 
   def broken_bikes
     @bikes.select{|bike| !bike.working?}
-  end 
+  end
+
+  def remove_broken
+    @bikes -= broken_bikes
+  end
+
 private
 
   def full?
