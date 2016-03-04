@@ -4,9 +4,9 @@ require "docking_station"
 describe DockingStation do
   it { is_expected.to respond_to (:release_bike) }
   let(:bike){double :bike, :working? => true}
+  let(:bike_broken){double :bike, :working? => false}
 
   it 'releases working bikes' do
-    bike = double(:bike, :working? => true)
     subject.dock bike
     #allow(bike).to receive(:working?).and_return(true)
     expect(subject.release_bike).to be_working
@@ -51,24 +51,27 @@ describe DockingStation do
   end
 
   it "should have capacity of 20 when initialized with no argument" do
-    station = DockingStation.new
-    expect(station.capacity).to eq DockingStation::DEFAULT_VALUE
+    expect(subject.capacity).to eq DockingStation::DEFAULT_VALUE
   end
 
   it "should not release a broken bike" do
-    bike = double(:bike, :working? => false, :report_broken => false)
-    bike.report_broken
-    subject.dock(bike)
+    subject.dock(bike_broken)
     expect {subject.release_bike}.to raise_error("Sorry no bikes available!")
   end
 
 
   describe "broken bikes" do
     it "should return an array of only broken bikes" do
-      bike_broken = double(:bike, :working? => false)
       subject.dock(bike)
       subject.dock(bike_broken)
       expect(subject.broken_bikes).to eq [bike_broken]
+    end
+  end
+
+  describe "remove_broken" do
+    it "should remove broken bikes from the array" do
+      subject.dock(bike_broken)
+      expect(subject.remove_broken).to eq []
     end
   end
 

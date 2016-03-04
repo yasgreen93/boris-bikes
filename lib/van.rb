@@ -14,10 +14,14 @@ attr_reader :bikes
   #   station.bikes.select!{|x| x.working?}
    end
   #
-  # def deliver_broken(garage)
-  #   @bikes.each{|x| garage.bikes << x}
-  #   @bikes = []
-  # end
+   def deliver_broken(garage)
+     bikes.each{|x| garage.bikes << x}
+     remove_bikes
+   end
+
+   def remove_bikes
+     bikes = []
+   end
   #
   # def collect_working(garage)
   #   garage.bikes.each{|bike| @bikes << bike} #maybe we should have a .report_broken called on each bike to 'fix' them?

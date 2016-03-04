@@ -9,7 +9,7 @@ describe Van do
   let(:garage){double(:garage, :bikes => [])}
   let(:garage_full){double(:garage_full, :bikes => [bike_working, bike_working])}
   it {is_expected.to respond_to(:collect_broken).with(1).argument}
-  # it {is_expected.to respond_to(:deliver_broken).with(1).argument}
+  it {is_expected.to respond_to(:deliver_broken).with(1).argument}
 
   it "has an empty array to store bikes" do
     expect(subject.bikes).to be_a Array
@@ -19,8 +19,24 @@ describe Van do
     it "should remove bikes from station and insert them into van" do
       subject.collect_broken(station)
       expect(subject.bikes).to eq [bike_broken]
-      expect(station.remove_broken).to eq [bike_working]
     end
+  end
+
+  describe "deliver_broken" do
+    it "should transfer bikes to the garage and remove from van" do
+      subject.collect_broken(station)
+      subject.deliver_broken(garage)
+      expect(garage.bikes).to eq [bike_broken]
+      expect(subject.deliver_broken(garage)).to eq []
+    end
+  end
+
+  describe "remove_bikes" do
+    it "should remove bikes from array after delivering" do
+      subject.collect_broken(station)
+      expect(subject.remove_bikes). to eq []
+    end
+
   end
 
   # describe "#collect_broken" do
