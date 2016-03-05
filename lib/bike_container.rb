@@ -11,9 +11,10 @@ module BikeContainer
 
   def load_bikes(source)
     source.bikes.each { |bike| bikes << bike  }
-    bikes
+    @bikes
   end
 
   def remove_bikes(bike_array)
+    @bikes -= bike_array
   end
 end
