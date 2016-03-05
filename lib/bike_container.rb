@@ -9,6 +9,6 @@ module BikeContainer
     @bikes = []
   end
 
-  def add_bike(bike)
+  def load_bikes(source)
   end
 end
