@@ -1,26 +1,29 @@
-<<<<<<< HEAD
-boris-bikes
-A program that will run all docking stations, simulate the bikes, and emulate all infrastructure.
-Will be updated as we progress.
-=======
-<<<<<<< HEAD
-Boris Bikes
+## Boris Bikes - Week 1 of Makers Academy
 
-This program operates the Boris Bikes network. 
+A command-line interface program that runs all docking stations, simulate the bikes, and emulate all infrastructure of the Boris Bike network.
 
-copyright & licensing: project specification used by permission of Makers Academy.
+Test-driven with RSpec and written in Ruby.
 
-Authors: Adil Ali and Shane Oston Stowe
+#### Installation and setup
 
-Contact: @adilw3nomad @shaneoston72
- 
-=======
-NAME:  Boris Bikes
-DESCRIPTION: This project is a program that operates the Boris Bikes network (stations, bikes and infrastructure components).
-COPYRIGHT AND LICENSING: Project specification used by permission of Makers Academy.
-DOCS: https://github.com/makersacademy/course/blob/master/boris_bikes/0_challenge_map.md
-CODE BASE:
-AUTHORS: Adil Adi and Shane Oston Stowe
-CONTACT INFORMATION: github.com/shaneoston72 and github.com/adilw3nomad
->>>>>>> 2fa34985cd108ce1703805143eb0b813d20034cd
->>>>>>> dd72a5c1f43f19842abfdd007ccf4678e56db6cc
+Clone down the repository and change into the directory:  
+```
+git clone https://github.com/yasgreen93/boris-bikes.git
+cd boris-bikes
+```
+Install the gems required in the project:  
+```
+gem install bundle
+bundle
+```
+
+In IRB or PRY require the relevant files:
+```
+$ irb
+2.2.3 :001 > require './lib/docking_station.rb'
+ => true
+2.2.3 :002 > require './lib/garage.rb'
+ => true
+2.2.3 :003 > require './lib/van.rb'
+ => true
+ ```
