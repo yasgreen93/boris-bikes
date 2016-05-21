@@ -1,5 +1,16 @@
 class Bike
-  def working?
-    true
+ attr_writer :working
+
+  def initialize
+    @working = true
   end
+
+  def working?
+    @working
+  end
+
+  def report_broken
+    @working = !@working
+  end
+
 end
